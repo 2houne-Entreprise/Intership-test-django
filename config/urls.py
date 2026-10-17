@@ -6,5 +6,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('TaskFlow.urls')),
     path('projects/',include('projects.urls')),
-    
+    path(
+           "projects/<int:project_pk>/tasks/",
+           include("TaskManager.urls"),
+       ),
 ]

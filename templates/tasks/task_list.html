@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tâches - TaskFlow</title>
+</head>
+<body>
+    <h1>Tâches du projet : {{ project.name }}</h1>
+
+    <a href="{% url 'tasks:create' project_pk=project.pk %}">
+        Ajouter une tâche
+    </a>
+
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <h2>{{ task.title }}</h2>
+                    <p>Statut : {{ task.get_status_display }}</p>
+
+                    <p>
+                        Échéance :
+                        {{ task.deadline|date:"d/m/Y"|default:"Non définie" }}
+                    </p>
+
+                    <a href="{% url 'tasks:update' project_pk=project.pk pk=task.pk %}">
+                        Modifier
+                    </a>
+
+                    <a href="{% url 'tasks:delete' project_pk=project.pk pk=task.pk %}">
+                        Supprimer
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune tâche pour ce projet.</p>
+    {% endif %}
+
+    <a href="{% url 'projets:list' %}">Retour aux projets</a>
+</body>
+</html>
