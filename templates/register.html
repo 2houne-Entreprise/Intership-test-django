@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription - TaskFlow</title>
+</head>
+<body>
+    <h1>Créer un compte</h1>
+
+    <form method="post"  action="{% url 'register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">S'inscrire</button>
+    </form>
+
+    <a href="{% url 'login' %}">Se connecter</a>
+</body>
+</html>

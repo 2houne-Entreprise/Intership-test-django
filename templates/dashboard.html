@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page - TaskFlow</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: space-between;">
+        <p>TaskFlowApp</p>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Déconnexion</button>
+        </form>
+    </div>
+
+    <h1>Page d'accueil</h1>
+    <h2>Bienvenue sur TaskFlow </h2>
+</body>
+</html>
