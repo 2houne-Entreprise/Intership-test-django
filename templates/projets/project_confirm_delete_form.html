@@ -9,11 +9,11 @@
 
     <p>Veux-tu vraiment supprimer « {{ object.name }} » ?</p>
 
-    <form method="post">
+    <form method="post" >
         {% csrf_token %}
         <button type="submit">Confirmer la suppression</button>
     </form>
 
-    <a href="{% url 'projects:list' %}">Annuler</a>
+    <a href="{% url 'projets:list' %}">Annuler</a>
 </body>
 </html>

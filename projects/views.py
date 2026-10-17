@@ -33,7 +33,8 @@ class  ProjectCreateView(LoginRequiredMixin,CreateView):
 
 class ProjectUpdateView(LoginRequiredMixin,UpdateView):
     model=Project
-    form_class="projets/project_form.html"
+    form_class=ProjectForm
+    template_name="projets/project_form.html"
     success_url=reverse_lazy("projets:list")
 
 
@@ -42,10 +43,9 @@ class ProjectUpdateView(LoginRequiredMixin,UpdateView):
 
 
 
-class ProjetcDeleteView(LoginRequiredMixin,DeleteView):
-    
+class ProjectDeleteView(LoginRequiredMixin,DeleteView):
     model=Project
-    form_class="projets/project_confirm_delete_form.html"
+    template_name="projets/project_confirm_delete_form.html"
     success_url=reverse_lazy("projets:list")
 
 

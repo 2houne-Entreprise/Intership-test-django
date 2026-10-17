@@ -56,3 +56,5 @@ def  logout_view(req):
     return redirect("dashboard")
     
             
+def projetcs_view(req):
+    return render(req,"projets/list_view.html")

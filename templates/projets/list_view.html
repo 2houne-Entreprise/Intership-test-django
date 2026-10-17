@@ -4,31 +4,55 @@
     <meta charset="UTF-8">
     <title>Mes projets - TaskFlow</title>
 </head>
-<body>
+<div>
+
+    {% if request.user.is_authenticated %}
+<div style="display: flex;justify-content: space-between;">
+    <h1>Bienvenue, {{ request.user.username }} !</h1>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Se déconnecter</button>
+    </form>
+</div>
     <h1>Mes projets</h1>
+    <div style="margin: 10px;border: black 1px;">
+        
+        <a href="{% url 'projets:create' %}" style="margin: 10px;padding: 10px;">Créer un projet</a>
+    </div>
 
-    <a href="{% url 'projects:create' %}">Créer un projet</a>
 
-    {% if projects %}
-        <ul>
-            {% for project in projects %}
-                <li>
-                    <h2>{{ project.name }}</h2>
-                    <p>{{ project.description|default:"Aucune description" }}</p>
-                    <small>Créé le {{ project.created_at|date:"d/m/Y H:i" }}</small>
-
-                    <a href="{% url 'projects:update' project.pk %}">
+    {% if projets %}
+        <table border="1">
+            <tr>
+                <td>Projet</td>
+                <td>Description</td>
+                <td>Date de Creation</td>
+                <td>Action</td>
+            </tr>
+            {% for project in projets %}
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.description|default:"Aucune description" }}</td>
+                    <td>Créé le {{ project.created_at|date:"d/m/Y H:i" }}</td>
+<td style="display: flex;justify-content: space-between;">
+                    <a href="{% url 'projets:update' project.pk %}" style="margin: 10px;">
                         Modifier
                     </a>
 
-                    <a href="{% url 'projects:delete' project.pk %}">
+                    <a href="{% url 'projets:delete' project.pk %}" style="margin: 10px;">
                         Supprimer
                     </a>
-                </li>
+                    <td/>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     {% else %}
         <p>Tu n'as pas encore de projet.</p>
     {% endif %}
+    {% else %}
+           <p>Tu n'es pas connecté.</p>
+           <a href="{% url 'login' %}">Se connecter</a>
+  {% endif %}
 </body>
+
 </html>
