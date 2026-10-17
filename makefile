@@ -1,4 +1,6 @@
-.PHONY: run migrate  
+
+
+.PHONY: run migrate makemigrations
 
 PYTHON := .venv/Scripts/python.exe
 
@@ -7,3 +9,6 @@ run:
 
 migrate:
 	$(PYTHON) manage.py migrate
+
+makemigrations:
+	$(PYTHON) manage.py makemigrations
