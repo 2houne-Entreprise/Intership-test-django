@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Projet - TaskFlow</title>
+</head>
+<body>
+    <h1>
+        {% if object %}
+            Modifier le projet
+        {% else %}
+            Créer un projet
+        {% endif %}
+    </h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <a href="{% url 'projects:list' %}">Annuler</a>
+</body>
+</html>
