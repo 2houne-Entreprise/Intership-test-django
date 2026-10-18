@@ -8,6 +8,7 @@ from .forms import TaskForm
 from .models import Task
 from projects.models import Project
 from django.shortcuts import get_object_or_404, redirect
+from projects.mixins import ProjectOwnerRequiredMixin
 
 
 
@@ -28,7 +29,7 @@ class TaskListView(LoginRequiredMixin,ListView):
         return context
         
 
-class TaskCreateView(LoginRequiredMixin,CreateView):
+class TaskCreateView(ProjectOwnerRequiredMixin,CreateView):
     model=Task
     form_class=TaskForm
     template_name="tasks/task_form.html"
@@ -59,7 +60,7 @@ class TaskCreateView(LoginRequiredMixin,CreateView):
 
 
   
-class TaskUpdateView(LoginRequiredMixin,UpdateView):
+class TaskUpdateView(ProjectOwnerRequiredMixin,UpdateView):
     model = Task
     form_class = TaskForm
     template_name = "tasks/task_form.html"
@@ -72,7 +73,7 @@ class TaskUpdateView(LoginRequiredMixin,UpdateView):
 
 
 
-class TaskDaleteView(LoginRequiredMixin,DeleteView):
+class TaskDaleteView(ProjectOwnerRequiredMixin,DeleteView):
     model = Task
     template_name = "tasks/task_confirm_delete.html"
 
@@ -86,7 +87,7 @@ class TaskDaleteView(LoginRequiredMixin,DeleteView):
 
 
 
-class TaskStatusUpdateView(LoginRequiredMixin, View):
+class TaskStatusUpdateView(ProjectOwnerRequiredMixin, View):
     
 
     def post(self, request, project_pk, pk):

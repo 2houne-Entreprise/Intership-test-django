@@ -7,6 +7,7 @@ from django.views.generic import (
     DeleteView,
     UpdateView
 )
+from .mixins import ProjectOwnerRequiredMixin
 
 from projects.forms import ProjectForm
 from projects.models import Project
@@ -17,7 +18,7 @@ class ProjectListView(LoginRequiredMixin,ListView):
     context_object_name="projets"
 
     def get_queryset(self):
-        return Project.objects.filter(user=self.request.user)
+        return Project.objects.all()
 
 class  ProjectCreateView(LoginRequiredMixin,CreateView):
     model=Project
@@ -32,7 +33,9 @@ class  ProjectCreateView(LoginRequiredMixin,CreateView):
 
 
 
-class ProjectUpdateView(LoginRequiredMixin,UpdateView):
+class ProjectUpdateView(ProjectOwnerRequiredMixin,UpdateView):
+    project_kwarg="pk"
+    
     model=Project
     form_class=ProjectForm
     template_name="projets/project_form.html"
@@ -41,10 +44,10 @@ class ProjectUpdateView(LoginRequiredMixin,UpdateView):
 
     def get_queryset(self):
         return Project.objects.filter(user=self.request.user)
+        
 
 
-
-class ProjectDeleteView(LoginRequiredMixin,DeleteView):
+class ProjectDeleteView(ProjectOwnerRequiredMixin,DeleteView):
     model=Project
     template_name="projets/project_confirm_delete_form.html"
     success_url=reverse_lazy("projets:list")
@@ -64,7 +67,7 @@ class ProjectDetaiView(LoginRequiredMixin,DetailView):
 
 
     def get_queryset(self):
-        return Project.objects.filter(user=self.request.user)
+        return Project.objects.all()
     
     
     def get_context_data(self, **kwargs):
