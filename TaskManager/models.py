@@ -32,6 +32,11 @@ class Task(models.Model):
            choices=Status.choices,
            default=Status.PENDING,
        )
+    attachment = models.FileField(
+           upload_to="attachments/",
+           null=True,
+           blank=True,
+           )   
 
 
        

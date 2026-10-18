@@ -19,6 +19,7 @@
             <th>Titre</th>
             <th>Statut</th>
             <th>Échéance</th>
+            <th>Attachement</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -53,6 +54,18 @@
             <td>
                 {{ task.deadline|date:"d/m/Y"|default:"Non définie" }}
             </td>
+           <td>
+               {% if task.attachment %}
+                   <p>
+                       Pièce jointe :
+                       <a href="{{ task.attachment.url }}" download>
+                           Télécharger le fichier
+                       </a>
+                   </p>
+               {% else %}
+                   <p>Aucune pièce jointe pour cette tâche.</p>
+               {% endif %}
+           </td> 
 
             <td>
                 <a href="{% url 'tasks:update' project_pk=project.pk pk=task.pk %}">

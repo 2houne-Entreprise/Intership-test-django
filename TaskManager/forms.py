@@ -8,7 +8,7 @@ from TaskManager.models import Task
 class TaskForm(forms.ModelForm):
     class Meta:
         model=Task
-        fields=["title","status","deadline"]
+        fields=["title","status","deadline","attachment"]
 
         widgets={
             "title": forms.TextInput(attrs={
@@ -19,6 +19,9 @@ class TaskForm(forms.ModelForm):
                  "deadline": forms.DateInput(attrs={
                      "type": "date",
                  }),
+                 "attachment": forms.ClearableFileInput(attrs={
+                                "class": "form-control",
+                            }),
         }
     def clean_title(self):
         title = self.cleaned_data.get("title", "").strip()
