@@ -1,6 +1,6 @@
 
 
-.PHONY: run migrate makemigrations
+.PHONY: run migrate makemigrations test
 
 PYTHON := .venv/Scripts/python.exe
 
@@ -12,3 +12,6 @@ migrate:
 
 makemigrations:
 	$(PYTHON) manage.py makemigrations
+
+test:
+	$(PYTHON) manage.py test
