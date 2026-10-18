@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import  reverse_lazy
 from django.views.generic import (
+    DetailView,
     ListView,
     CreateView,
     DeleteView,
@@ -54,4 +55,20 @@ class ProjectDeleteView(LoginRequiredMixin,DeleteView):
 
     
     
+    
+    
+class ProjectDetaiView(LoginRequiredMixin,DetailView):
+    model=Project
+    template_name="projets/project_detais.html"
+    context_object_name="project"
+
+
+    def get_queryset(self):
+        return Project.objects.filter(user=self.request.user)
+    
+    
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)    
+        context["tasks"]=self.object.tasks.all()
+        return context
     

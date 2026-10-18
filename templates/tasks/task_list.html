@@ -13,9 +13,9 @@
     </a>
 
     {% if tasks %}
-        <ul>
+        <ul style="display: flex;flex-wrap: wrap;gap: 10px;list-style: none;">
             {% for task in tasks %}
-                <li>
+                <li style="flex: 0 0 calc(100%-20px)/3;box-sizing: border-box;background: silver;padding: 10px;">
                     <h2>{{ task.title }}</h2>
                     <p>Statut : {{ task.get_status_display }}</p>
 
@@ -23,15 +23,22 @@
                         Échéance :
                         {{ task.deadline|date:"d/m/Y"|default:"Non définie" }}
                     </p>
-
-                    <a href="{% url 'tasks:update' project_pk=project.pk pk=task.pk %}">
-                        Modifier
-                    </a>
-
-                    <a href="{% url 'tasks:delete' project_pk=project.pk pk=task.pk %}">
-                        Supprimer
-                    </a>
-                </li>
+                    <div style="margin: 10px;padding: 10px;display: flex;text-align: initial;">
+                       <div  style="margin: 10px;">
+                           
+                           
+                                                  <a href="{% url 'tasks:update' project_pk=project.pk pk=task.pk %}">
+                                                      Modifier
+                                                  </a>
+                              
+                       </div>     
+                       <div style="margin: 10px;">
+                           
+                           <a href="{% url 'tasks:delete' project_pk=project.pk pk=task.pk %}">
+                               Supprimer
+                           </a>
+                       </div>
+                    </div>               </li>
             {% endfor %}
         </ul>
     {% else %}

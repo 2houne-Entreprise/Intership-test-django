@@ -42,6 +42,9 @@
                     <a href="{% url 'projets:delete' project.pk %}" style="margin: 10px;">
                         Supprimer
                     </a>
+                           <a href="{% url 'projets:detail' pk=project.pk %}">
+                               Voir le projet et ses taches
+                           </a>
                     <td/>
                 </tr>
             {% endfor %}

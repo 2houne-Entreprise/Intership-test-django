@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}TaskFlow{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'projets:list' %}">TaskFlow</a>
+            <a href="{% url 'projets:list' %}">Mes projets</a>
+        </nav>
+    </header>
+
+    <main>
+        {% include "partials/_alerts.html" %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>TaskFlow — Gestion de projets et de tâches</p>
+    </footer>
+</body>
+</html>
