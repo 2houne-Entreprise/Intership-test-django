@@ -21,7 +21,7 @@ class TaskListView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         self.project=get_object_or_404(Project,pk=self.kwargs["project_pk"],user=self.request.user)
         
-        return Task.objects.filter(project=self.project)
+        return Task.objects.filter(project=self.project).select_related("project").order_by("deadline","title")
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)

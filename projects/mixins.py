@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.core.exceptions import PermissionDenied
 from projects.models import Project
-
+from django.contrib import messages
 
 
 class ProjectOwnerRequiredMixin(LoginRequiredMixin):
@@ -16,7 +16,10 @@ class ProjectOwnerRequiredMixin(LoginRequiredMixin):
         if project_pk is None:
             project=get_object_or_404(Project,pk=project_pk)
 
-            if project.user_id!=request.user.id:
-                raise PermissionDenied
+
+            if project.user_id != request.user.id:
+                messages.error(request,"Vous n'êtes pas autorisé à effectuer cette opération." )
+                return redirect("projets:list")
+                
             self.project=project
         return super().dispatch(request, *args, **kwargs)

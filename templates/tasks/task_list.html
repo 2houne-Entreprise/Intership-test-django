@@ -17,7 +17,7 @@
             {% for task in tasks %}
                 <li style="flex: 0 0 calc(100%-20px)/3;box-sizing: border-box;background: silver;padding: 10px;">
                     <h2>{{ task.title }}</h2>
-                    <p>Statut : {{ task.get_status_display }}</p>
+                    <p>Statut : {{ task.get_status_display| task.status_label }}</p>
 
                     <p>
                         Échéance :
